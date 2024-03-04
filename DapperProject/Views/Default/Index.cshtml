@@ -1,0 +1,54 @@
+﻿@using DapperProject.Dtos;
+@model PaginatedResult<ResultProjectDto>
+
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="query-execution-time">
+    Sorgu Süresi: @ViewBag.QueryExecutionTime saniye
+</div>
+
+<div class="container">
+    <br /><br />
+    <table class="table table-hover">
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <!-- Diğer sütunlar... -->
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model.Data)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.rms</td>
+                <td>@item.eventID</td>
+                <td>@item.location</td>
+                <td>@item.latitude</td>
+                <td>@item.longitude</td>
+                <td>@item.magnitude</td>
+                <td>@item.country</td>
+                <td>@item.province</td>
+                <td>@item.district</td>
+                <td>@item.date</td>
+                <td>@item.isEventUpdate</td>
+                <td>@item.lastUpdateDate</td>
+                <td><a href="/Default/Delete/@item.id" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Default/Update/@item.id" class="btn btn-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <div class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { page = i, pageSize = Model.PageSize })">@i</a>
+            @if (i < Model.TotalPages)
+            {
+                <span>|</span>
+            }
+        }
+    </div>
+</div>
