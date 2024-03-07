@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="~/adminPanel3-master/styles.css">
+    <title>Admin panel</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>AFAD</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="/Dashboard/">
+                        <i class="fas fa-th-large"></i>
+                        <div>Anasayfa</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        <div>Sehir Deprem Listesi</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        <div>En Cok Deprem Olan Sehirler</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        <div>En Az Deprem Olan Sehirler</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        <div>Analytics</div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+     <div class="main" style="padding: 50px">
+    <table style="border-collapse: collapse; width: 100%; border: 2px solid #ddd;">
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+            <td style="border: 1px solid #ddd; padding: 8px;">sehir</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">ad</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">asdsadsadsa</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">asdsadsadsa</td>
+        </tr>
+    </table>
+</div>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="~/adminPanel3-master/chart1.js"></script>
+    <script src="~/adminPanel3-master/chart2.js"></script>
+</body>
+
+</html>
