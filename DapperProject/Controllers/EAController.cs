@@ -1,17 +1,17 @@
 ﻿using Dapper;
 using DapperProject.DapperContext;
-using DapperProject.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DapperProject.Controllers
 {
-    public class CityListController : Controller
+    public class EAController : Controller
     {
         private readonly Context _context;
 
-        public CityListController(Context context)
+        public EAController(Context context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace DapperProject.Controllers
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            string query = "SELECT province AS sehir, COUNT(*) AS depremSayisi FROM EQAfad WHERE YEAR(date) = 2023 GROUP BY province ORDER BY province";
+            string query = "SELECT TOP 10 province AS sehir, COUNT(*) AS depremSayisi FROM EQAfad GROUP BY province ORDER BY depremSayisi ASC";
 
             var connection = _context.CreateConnection();
             var cityList = await connection.QueryAsync<dynamic>(query);

@@ -24,7 +24,7 @@
                 <h2>AFAD</h2>
             </div>
             <div class="search">
-                <input type="text" name="search" placeholder="search here">
+                <input type="text" name="search" placeholder="Ara">
                 <label for="search"><i class="fas fa-search"></i></label>
             </div>
 
@@ -44,21 +44,21 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/EC/">
                         <i class="fas fa-chart-bar"></i>
                         <div>En Cok Deprem Olan Sehirler</div>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/EA/">
                         <i class="fas fa-chart-bar"></i>
                         <div>En Az Deprem Olan Sehirler</div>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/List/">
                         <i class="fas fa-chart-bar"></i>
-                        <div>Analytics</div>
+                        <div>Deprem Listesi</div>
                     </a>
                 </li>
 
@@ -72,7 +72,7 @@
                         <div class="card-name">En Cok Deprem Olan Sehir </div>
                     </div>
                     <div class="icon-box">
-                        <i class="fas fa-user-graduate"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                 </div>
                 <div class="card">
@@ -81,7 +81,7 @@
                         <div class="card-name">En Az Deprem Olan Sehir </div>
                     </div>
                     <div class="icon-box">
-                        <i class="fas fa-chalkboard-teacher"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                 </div>
                 <div class="card">
@@ -90,28 +90,28 @@
                         <div class="card-name">Bu Yilin En Yuksek Depremi</div>
                     </div>
                     <div class="icon-box">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
-                        <div class="number">3433</div>
+                        <div class="number">@ViewBag.depremsayi</div>
                         <div class="card-name">Bu Yilin Deprem Sayisi</div>
                     </div>
                     <div class="icon-box">
-                        <i class="fas fa-dollar-sign"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                 </div>
             </div>
             <div class="charts">
                 <div class="chart">
-                    <h2>Earnings (past 12 months)</h2>
+                    <h2>Son 12 Ay Deprem Sayısı</h2>
                     <div>
                         <canvas id="lineChart"></canvas>
                     </div>
                 </div>
                 <div class="chart doughnut-chart">
-                    <h2>Employees</h2>
+                    <h2>En Çok Deprem Olan Şehirler</h2>
                     <div>
                         <canvas id="doughnut"></canvas>
                     </div>
@@ -120,8 +120,80 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script src="~/adminPanel3-master/chart1.js"></script>
-    <script src="~/adminPanel3-master/chart2.js"></script>
+    <script>
+                var topCitiesData = @Html.Raw(Json.Serialize(ViewBag.TopCities));
+
+        var ctx2 = document.getElementById('doughnut').getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: topCitiesData.map(city => city.province),
+                datasets: [{
+                    label: 'Earthquakes',
+                    data: topCitiesData.map(city => city.earthquakeCount),
+                    backgroundColor: [
+                        'rgba(41, 155, 99, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(120, 46, 139, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(41, 155, 99, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(120, 46, 139, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    
+    </script>
+    <!-- HTML içindeki JavaScript kısmı -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script>
+        var topMonthsData = @Html.Raw(Json.Serialize(ViewBag.TopMonths));
+
+        var monthLabels = topMonthsData.map(month => {
+            switch (month.month) {
+                case 1: return 'Ocak';
+                case 2: return 'Şubat';
+                case 3: return 'Mart';
+                case 4: return 'Nisan';
+                case 5: return 'Mayıs';
+                case 6: return 'Haziran';
+                case 7: return 'Temmuz';
+                case 8: return 'Ağustos';
+                case 9: return 'Eylül';
+                case 10: return 'Ekim';
+                case 11: return 'Kasım';
+                case 12: return 'Aralık';
+                default: return '';
+            }
+        });
+
+        var ctx = document.getElementById('lineChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: monthLabels,
+                datasets: [{
+                    label: 'Deprem Sayısı',
+                    data: topMonthsData.map(month => month.earthquakeCount),
+                    backgroundColor: 'rgba(85, 85, 85, 1)',
+                    borderColor: 'rgb(41, 155, 99)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+
 </body>
 
 </html>

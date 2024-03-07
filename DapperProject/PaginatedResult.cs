@@ -2,18 +2,20 @@
 {
     public class PaginatedResult<T>
     {
-        public List<T> Data { get; }
-        public int Page { get; }
-        public int PageSize { get; }
-        public int TotalCount { get; }
+        public List<T> Data { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalCount { get; set; }
+
         public int TotalPages => (int)Math.Ceiling(TotalCount / (double)PageSize);
 
-        public PaginatedResult(List<T> data, int page, int pageSize, int totalCount)
+        public PaginatedResult(List<T> data, int currentPage, int pageSize, int totalCount)
         {
             Data = data;
-            Page = page;
+            CurrentPage = currentPage;
             PageSize = pageSize;
             TotalCount = totalCount;
         }
     }
+
 }
