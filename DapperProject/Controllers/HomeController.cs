@@ -22,6 +22,7 @@ namespace DapperProject.Controllers
         {
             return View();  
         }
+        //test deneme
         public IActionResult Privacy()
         {
             return View();
